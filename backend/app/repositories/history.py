@@ -14,6 +14,18 @@ def insert_run(window_id, fabric_id, result, note=""):
     finally:
         c.close()
 
+def get_run(run_id):
+    c = connect()
+    try:
+        r = c.execute("SELECT * FROM calc_runs WHERE id=?", (run_id,)).fetchone()
+        if not r:
+            return None
+        d = dict(r)
+        d["result"] = json.loads(d.pop("result_json"))
+        return d
+    finally:
+        c.close()
+
 def list_runs(limit=50):
     c = connect()
     try:

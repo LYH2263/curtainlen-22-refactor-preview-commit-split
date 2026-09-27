@@ -9,7 +9,7 @@ onMounted(async () => {
   if (windows.value.length) wid.value = windows.value[0].id
   if (fabrics.value.length) fid.value = fabrics.value[0].id
 })
-async function go(save){ out.value = save ? await postJSON('/api/estimate',{window_id:wid.value,fabric_id:fid.value,save:true}) : await getJSON(`/api/estimate?window_id=${wid.value}&fabric_id=${fid.value}`) }
+async function go(save){ out.value = save ? await postJSON('/api/estimate',{window_id:wid.value,fabric_id:fid.value}) : await getJSON(`/api/estimate?window_id=${wid.value}&fabric_id=${fid.value}`) }
 </script>
 <template><div class="page"><h1>算料</h1>
 <select v-model.number="wid"><option v-for="x in windows" :key="x.id" :value="x.id">{{ x.name }}</option></select>
